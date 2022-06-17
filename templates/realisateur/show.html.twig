@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réalisateurs {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="nav">
+<a href=" {{ path('show_film') }} "> Liste des Films </a><br>
+<a href=" {{ path('show_realisateur') }} "> Liste des Realisateurs </a><br>
+<a href=" {{ path('show_genre') }} "> Liste des Genres </a><br>
+<a href=" {{ path('show_acteur') }} "> Liste des Acteurs </a><br>
+<a href=" {{ path('show_personnages') }} "> Liste des personnages </a>
+<hr>
+</div>
+<div class="example-wrapper">
+    <h1>Liste des Réalisateur</h1>
+<a href="{{ path('add_realisateur') }}"> Ajouter un Réalisateur</a><br><br>
+{% for realisateur in realisateurs %}
+    
+    <a href="{{ path('detail_realisateur', {'id': realisateur.id}) }}">{{realisateur.nom}} {{realisateur.prenom}}</a> <a href="{{ path('delete_realisateur',{'id': realisateur.id}) }}">Supprimer</a> <a href="{{ path('update_realisateur',{'id': realisateur.id}) }}">Editer</a> <br>
+
+{% endfor %}
+     
+
+{% endblock %}

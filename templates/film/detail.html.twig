@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détails {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="nav">
+<a href=" {{ path('show_film') }} "> Liste des Films </a><br>
+<a href=" {{ path('show_realisateur') }} "> Liste des Realisateurs </a><br>
+<a href=" {{ path('show_genre') }} "> Liste des Genres </a><br>
+<a href=" {{ path('show_acteur') }} "> Liste des Acteurs </a><br>
+<a href=" {{ path('show_personnages') }} "> Liste des personnages </a>
+<hr>
+</div>
+<div class="example-wrapper">
+    <h1>Détail du Film</h1>
+
+ <h1>{{ film }}</h1>
+     <img src="{{film.affiche}}">
+    <p> Titre : {{ film.titre}}</p>
+    <p> Durée : {{ film.duree | date("H:i", "Europe/Paris")}}</p> 
+    <p> Date de Création : {{film.dateSortie | date('Y-m-d')}}</p><br>
+    <p> Synopsis : <br>{{film.synopsis}}</p>
+           
+         <h2> Réalisateur </h2>
+    {% if film.idrealisateur | length > 0 %}
+        {# {% for realisateur in film.idrealisateur %} #}
+            {{ film.idrealisateur }} {{film.idrealisateur.prenom}}
+        {# {% endfor %} #}
+        {% else %}
+            <p> Aucun film insérer pour ce réalisateur. </p>
+    {% endif %}
+     
+     <h2> Rôle et Acteur </h2>
+
+     {% for casting in film.castings %}
+        <a href="{{ path('detail_acteur', {'id': casting.acteur.id}) }}">{{ casting.acteur }} {{casting.acteur.nom}}</a> Dans le rôle de <a href="{{ path('detail_personnage', {'id': casting.personnage.id}) }}">{{casting.personnage}}</a><br>
+     {% endfor %}
+ 
+{% endblock %}

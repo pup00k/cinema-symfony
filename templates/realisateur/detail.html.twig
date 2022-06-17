@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détails {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="nav">
+<a href=" {{ path('show_film') }} "> Liste des Films </a><br>
+<a href=" {{ path('show_realisateur') }} "> Liste des Realisateurs </a><br>
+<a href=" {{ path('show_genre') }} "> Liste des Genres </a><br>
+<a href=" {{ path('show_acteur') }} "> Liste des Acteurs </a><br>
+<a href=" {{ path('show_personnages') }} "> Liste des personnages </a>
+<hr>
+</div>
+<div class="example-wrapper">
+    <h1>Détail du Film</h1>
+
+ <h1>{{ realisateur }}</h1>
+
+    <p> Nom : {{ realisateur.nom}}</p>
+    <p> Prénom : {{ realisateur.prenom}}</p> 
+    <p> Date de Naissance : {{realisateur.dateborn | date('Y-m-d')}}</p><br>
+
+
+         <h2> Filmographie </h2>
+    {% if realisateur.films | length >0 %}
+        {% for film in realisateur.films %}
+            {{ film }}
+        {% endfor %}
+        {% else %}
+            <p> Aucun film insérer pour ce réalisateur. </p>
+    {% endif %}
+    
+       
+       
+       
+       {# {% for film in realisateur.films %}
+        {{film}} <br> 
+    {# {% for employe in entreprise.employes %}
+        {{employe}} <br>
+    {% endfor %} #}
+
+
+{% endblock %}

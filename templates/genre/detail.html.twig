@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Détails {% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="nav">
+<a href=" {{ path('show_film') }} "> Liste des Films </a><br>
+<a href=" {{ path('show_realisateur') }} "> Liste des Realisateurs </a><br>
+<a href=" {{ path('show_genre') }} "> Liste des Genres </a><br>
+<a href=" {{ path('show_acteur') }} "> Liste des Acteurs </a><br>
+<a href=" {{ path('show_personnages') }} "> Liste des personnages </a>
+<hr>
+</div>
+<div class="example-wrapper">
+
+ <h1>Détail du genre</h1>
+
+    <p> Nom Du Genre : {{genre.nom}}</p>
+   
+
+
+         <h2> Film Associer :  </h2>
+    {% if genre.films | length > 0 %}
+        {% for film in genre.films %}
+        <a href="{{ path('detail_film', {'id': film.id}) }}">{{ film }}</a>
+        {% endfor %}
+        {% else %}
+            <p> Aucun film insérer pour ce Genre. </p>
+    {% endif %} 
+     
+ 
+{% endblock %}
